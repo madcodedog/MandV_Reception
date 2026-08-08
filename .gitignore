@@ -1,2 +1,6 @@
 .DS_Store
 .claude/settings.local.json
+
+# Audio isn't committed automatically — only add a track here once you've
+# confirmed you have the right to publish it publicly (see assets/README.md).
+assets/*.mp3
