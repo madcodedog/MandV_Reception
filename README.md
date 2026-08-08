@@ -32,15 +32,13 @@ then visit `http://localhost:4173`.
 
 ## Publish for free on GitHub Pages
 
-1. Create a new **public** repository on GitHub (e.g. `manish-sriviveka-wedding`).
-2. From this folder:
-   ```bash
-   git remote add origin https://github.com/<your-username>/<repo-name>.git
-   git branch -M main
-   git push -u origin main
-   ```
-3. On GitHub: go to the repo → **Settings → Pages** → under "Build and deployment", set **Source** to `Deploy from a branch`, branch `main`, folder `/ (root)` → **Save**.
-4. After a minute, your site will be live at:
-   `https://<your-username>.github.io/<repo-name>/`
+This repo is hosted at [github.com/madcodedog/MandV_Reception](https://github.com/madcodedog/MandV_Reception).
+
+1. On GitHub: go to the repo → **Settings → Pages** → under "Build and deployment", set **Source** to `Deploy from a branch`, branch `main`, folder `/ (root)` → **Save**.
+2. After a minute, your site will be live at:
+   `https://madcodedog.github.io/MandV_Reception/`
 
 Share that link with your guests.
+
+## Background music (optional)
+No music is bundled — see [assets/README.md](assets/README.md). Drop a licensed instrumental track at `assets/music.mp3` and a play/pause button appears automatically.
