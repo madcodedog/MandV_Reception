@@ -10,10 +10,9 @@ Live content:
 
 ## Structure
 ```
-index.html            Markup / content
-css/style.css         Theme, layout, animations
-js/script.js          Petal/spark animation, envelope interaction, countdown, calendar links
-js/ambient-music.js   Original generative garden soundscape (Web Audio API)
+index.html      Markup / content
+css/style.css   Theme, layout, animations
+js/script.js    Petal/spark animation, envelope interaction, countdown, calendar links, music hook
 ```
 
 No build step, no dependencies — plain HTML/CSS/JS.
@@ -42,4 +41,4 @@ This repo is hosted at [github.com/madcodedog/MandV_Reception](https://github.co
 Share that link with your guests.
 
 ## Background music
-The play/pause button in the bottom-right corner controls an original ambient soundscape — a soft drone pad plus randomized wind-chime bell tones — synthesized live in the browser by `js/ambient-music.js` via the Web Audio API. No audio file, nothing copyrighted. See [assets/README.md](assets/README.md).
+Upload any `music.mp3` to the [assets](assets/) folder directly on github.com and the site plays it automatically — the play/pause button appears on its own once a file exists, and it starts the moment a guest taps the envelope open. See [assets/README.md](assets/README.md).

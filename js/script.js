@@ -128,7 +128,7 @@
     if (opened) return;
     opened = true;
     envelope.classList.add('opening');
-    startMusic(); // the tap that opens the envelope is our one real user gesture — browsers won't allow audio to start without it
+    startMusic(); // works if this was a real tap; browsers silently block it if triggered by the auto-open fallback timer below
 
     setTimeout(() => {
       envelopeScreen.classList.add('closed');
@@ -145,6 +145,10 @@
   waxSeal.addEventListener('click', openInvitation);
   envelope.addEventListener('click', openInvitation);
   document.body.style.overflow = 'hidden';
+
+  // Guests who don't know to tap (or don't notice the hint) still see the
+  // invitation — it opens itself after a few seconds either way.
+  setTimeout(() => { if (!opened) openInvitation(); }, 4500);
 
   /* ============================================================
      2b. CLICK-TO-BLOOM (site-wide) + HERO PARALLAX
@@ -170,40 +174,41 @@
   }
 
   /* ============================================================
-     2c. AMBIENT GARDEN MUSIC (generated live, see js/ambient-music.js)
-     Starts automatically when the envelope is opened (see openInvitation
-     above) — that tap is the user gesture browsers require before any
-     audio can play. The button just lets guests pause/resume afterward.
+     2c. BACKGROUND MUSIC — plays whatever file is at assets/music.mp3.
+     Upload/replace that file directly on github.com any time; no code
+     changes needed. The button stays hidden until a file is actually
+     there. Starts automatically when the envelope is opened by a real
+     tap (browsers block autoplay without one).
      ============================================================ */
+  const bgm = document.getElementById('bgm');
   const musicToggle = document.getElementById('musicToggle');
-  let musicPlaying = false;
+
+  if (bgm && musicToggle){
+    bgm.addEventListener('loadedmetadata', () => { musicToggle.hidden = false; }, { once: true });
+    bgm.addEventListener('error', () => { musicToggle.hidden = true; }, true);
+    bgm.load();
+
+    musicToggle.addEventListener('click', () => {
+      if (bgm.paused){
+        bgm.play().catch(() => {});
+        musicToggle.classList.add('playing');
+        musicToggle.setAttribute('aria-label', 'Pause music');
+      } else {
+        bgm.pause();
+        musicToggle.classList.remove('playing');
+        musicToggle.setAttribute('aria-label', 'Play music');
+      }
+    });
+  }
 
   function startMusic(){
-    if (musicPlaying || !window.GardenAmbience) return;
-    musicPlaying = true;
-    window.GardenAmbience.start();
-    if (musicToggle){
-      musicToggle.classList.add('playing');
-      musicToggle.textContent = '♫';
-      musicToggle.setAttribute('aria-label', 'Pause garden music');
-    }
-  }
-
-  function pauseMusic(){
-    if (!musicPlaying || !window.GardenAmbience) return;
-    musicPlaying = false;
-    window.GardenAmbience.stop();
-    if (musicToggle){
-      musicToggle.classList.remove('playing');
-      musicToggle.textContent = '♪';
-      musicToggle.setAttribute('aria-label', 'Play garden music');
-    }
-  }
-
-  if (musicToggle){
-    musicToggle.addEventListener('click', () => {
-      if (musicPlaying) pauseMusic(); else startMusic();
-    });
+    if (!bgm || !bgm.paused) return;
+    bgm.play().then(() => {
+      if (musicToggle){
+        musicToggle.classList.add('playing');
+        musicToggle.setAttribute('aria-label', 'Pause music');
+      }
+    }).catch(() => {}); // blocked when opened via the auto-open fallback rather than a real tap
   }
 
   /* ============================================================

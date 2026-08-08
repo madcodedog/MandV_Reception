@@ -24,24 +24,29 @@
 <!-- Twinkling fairy lights live here, injected by JS -->
 <div id="spark-field" aria-hidden="true"></div>
 
-<!-- Ambient garden music: an original soundscape generated live in the
-     browser (js/ambient-music.js) — no audio file, nothing copyrighted. -->
-<button id="musicToggle" class="music-toggle" aria-label="Play garden music">♪</button>
+<!-- Background music: drop any file named assets/music.mp3 into the repo
+     (upload it directly on github.com — no code changes needed) and this
+     button appears automatically and plays it. -->
+<audio id="bgm" loop preload="none">
+  <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
+<button id="musicToggle" class="music-toggle" hidden aria-label="Play music">♪</button>
 
 <!-- ===================== ENVELOPE INTRO ===================== -->
 <section id="envelope-screen">
   <div class="envelope" id="envelope">
     <div class="envelope-back"></div>
     <div class="envelope-letter">
-      <div class="letter-monogram">M <span>&amp;</span> S</div>
-      <p class="letter-line">You are invited</p>
+      <p class="letter-names">Manish <span class="letter-amp">&amp;</span> Sriviveka</p>
+      <div class="letter-flourish">❦</div>
+      <p class="letter-date">20th September 2026</p>
     </div>
     <div class="envelope-flap"></div>
     <div class="wax-seal" id="waxSeal">
       <span>M<span class="seal-amp">&amp;</span>S</span>
     </div>
   </div>
-  <p class="tap-hint">tap the seal to open your invitation</p>
+  <p class="tap-hint">tap anywhere to open your invitation</p>
 </section>
 
 <!-- ===================== MAIN INVITATION ===================== -->
@@ -244,7 +249,6 @@
 
 </main>
 
-<script src="js/ambient-music.js"></script>
 <script src="js/script.js"></script>
 </body>
 </html>
