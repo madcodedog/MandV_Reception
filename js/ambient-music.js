@@ -173,9 +173,17 @@
     if (melodyStep === 0){
       chordIndex = (chordIndex + 1) % CHORDS.length;
       const now = audioCtx.currentTime;
-      if (padOsc){
-        padOsc[0].frequency.setTargetAtTime(CHORDS[chordIndex], now, 0.4);
-        padOsc[1].frequency.setTargetAtTime(CHORDS[chordIndex], now, 0.4);
+      if (padOsc && padGain){
+        // Duck the pad out, jump the pitch while silent, fade back in —
+        // a continuous glide between chord roots on a sawtooth sounds
+        // like a siren, so we avoid sweeping the pitch audibly at all.
+        padGain.gain.cancelScheduledValues(now);
+        padGain.gain.setValueAtTime(padGain.gain.value, now);
+        padGain.gain.linearRampToValueAtTime(0.0001, now + 0.18);
+        padOsc[0].frequency.setValueAtTime(CHORDS[chordIndex], now + 0.2);
+        padOsc[1].frequency.setValueAtTime(CHORDS[chordIndex], now + 0.2);
+        padGain.gain.setValueAtTime(0.0001, now + 0.2);
+        padGain.gain.linearRampToValueAtTime(0.1, now + 0.55);
       }
     }
 
