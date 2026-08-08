@@ -169,24 +169,23 @@
   }
 
   /* ============================================================
-     2c. OPTIONAL BACKGROUND MUSIC
+     2c. AMBIENT GARDEN MUSIC (generated live, see js/ambient-music.js)
      ============================================================ */
-  const bgm = document.getElementById('bgm');
   const musicToggle = document.getElementById('musicToggle');
-  if (bgm && musicToggle){
-    musicToggle.hidden = true;
-    bgm.addEventListener('loadedmetadata', () => { musicToggle.hidden = false; }, { once: true });
-    bgm.addEventListener('error', () => { musicToggle.hidden = true; }, true);
-    bgm.load();
+  if (musicToggle && window.GardenAmbience){
+    let playing = false;
     musicToggle.addEventListener('click', () => {
-      if (bgm.paused){
-        bgm.play();
+      playing = !playing;
+      if (playing){
+        window.GardenAmbience.start();
         musicToggle.classList.add('playing');
-        musicToggle.setAttribute('aria-label', 'Pause music');
+        musicToggle.textContent = '♫';
+        musicToggle.setAttribute('aria-label', 'Pause garden music');
       } else {
-        bgm.pause();
+        window.GardenAmbience.stop();
         musicToggle.classList.remove('playing');
-        musicToggle.setAttribute('aria-label', 'Play music');
+        musicToggle.textContent = '♪';
+        musicToggle.setAttribute('aria-label', 'Play garden music');
       }
     });
   }

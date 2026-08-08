@@ -1,5 +1,5 @@
 # assets
 
-Drop a background-music file here named `music.mp3` (instrumental, looped, that you have the legal right to use — e.g. a purchased/licensed karaoke or instrumental track, or something royalty-free) and a play/pause button will appear automatically in the bottom-right corner of the site. No code changes needed.
+No audio files needed here. Background music is an original ambient soundscape generated live in the browser by [js/ambient-music.js](../js/ambient-music.js) using the Web Audio API — a soft drone pad plus randomized wind-chime-style bell tones. It's synthesized from scratch, so there's nothing copyrighted involved.
 
-If no file is present, the button simply stays hidden.
+The `assets/*.mp3` pattern is still gitignored as a safety net in case an audio file ever ends up here — it won't get committed by accident.
