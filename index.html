@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manish & Sriviveka — Wedding Reception</title>
+<meta name="description" content="You are cordially invited to the wedding reception of Manish & Sriviveka, Sunday 20th September 2026, Srishti Vilasa, Bengaluru.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Manish & Sriviveka — Wedding Reception">
+<meta property="og:description" content="Sunday, 20th September 2026 · Srishti Vilasa, Kanakapura Road, Bengaluru">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Falling petals live here, injected by JS -->
+<div id="petal-field" aria-hidden="true"></div>
+<!-- Twinkling fairy lights live here, injected by JS -->
+<div id="spark-field" aria-hidden="true"></div>
+
+<!-- ===================== ENVELOPE INTRO ===================== -->
+<section id="envelope-screen">
+  <div class="envelope" id="envelope">
+    <div class="envelope-back"></div>
+    <div class="envelope-letter">
+      <div class="letter-monogram">M <span>&amp;</span> S</div>
+      <p class="letter-line">You are invited</p>
+    </div>
+    <div class="envelope-flap"></div>
+    <div class="wax-seal" id="waxSeal">
+      <span>M<span class="seal-amp">&amp;</span>S</span>
+    </div>
+  </div>
+  <p class="tap-hint">tap the seal to open your invitation</p>
+</section>
+
+<!-- ===================== MAIN INVITATION ===================== -->
+<main id="site" class="hidden">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="garland" aria-hidden="true">
+      <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMin slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="bloomBlue" cx="35%" cy="30%" r="75%">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="45%" stop-color="#bcd4ee"/>
+            <stop offset="100%" stop-color="#7fa0cc"/>
+          </radialGradient>
+          <radialGradient id="bloomLilac" cx="35%" cy="30%" r="75%">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="45%" stop-color="#d8c8ec"/>
+            <stop offset="100%" stop-color="#a992c9"/>
+          </radialGradient>
+          <radialGradient id="bloomWhite" cx="35%" cy="30%" r="75%">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="60%" stop-color="#f4f2fb"/>
+            <stop offset="100%" stop-color="#dcd6ec"/>
+          </radialGradient>
+
+          <g id="clusterBlue">
+            <circle cx="-10" cy="-6" r="11" fill="url(#bloomBlue)"/>
+            <circle cx="9" cy="-10" r="10" fill="url(#bloomBlue)"/>
+            <circle cx="12" cy="7" r="11" fill="url(#bloomBlue)"/>
+            <circle cx="-8" cy="10" r="10" fill="url(#bloomBlue)"/>
+            <circle cx="1" cy="0" r="12" fill="url(#bloomBlue)"/>
+          </g>
+          <g id="clusterLilac">
+            <circle cx="-9" cy="-7" r="10" fill="url(#bloomLilac)"/>
+            <circle cx="8" cy="-9" r="9" fill="url(#bloomLilac)"/>
+            <circle cx="11" cy="6" r="10" fill="url(#bloomLilac)"/>
+            <circle cx="-7" cy="9" r="9" fill="url(#bloomLilac)"/>
+            <circle cx="1" cy="0" r="11" fill="url(#bloomLilac)"/>
+          </g>
+          <g id="clusterWhite">
+            <circle cx="-8" cy="-6" r="9" fill="url(#bloomWhite)"/>
+            <circle cx="7" cy="-8" r="8" fill="url(#bloomWhite)"/>
+            <circle cx="10" cy="6" r="9" fill="url(#bloomWhite)"/>
+            <circle cx="-6" cy="8" r="8" fill="url(#bloomWhite)"/>
+            <circle cx="0" cy="0" r="10" fill="url(#bloomWhite)"/>
+          </g>
+        </defs>
+
+        <!-- vines -->
+        <path d="M70,0 C50,60 95,90 75,165" fill="none" stroke="#9fb488" stroke-width="2" opacity=".55"/>
+        <path d="M230,0 C210,40 250,65 235,115" fill="none" stroke="#9fb488" stroke-width="2" opacity=".55"/>
+        <path d="M410,0 C390,70 430,110 405,190" fill="none" stroke="#9fb488" stroke-width="2" opacity=".5"/>
+        <path d="M600,0 C580,35 615,55 600,95" fill="none" stroke="#9fb488" stroke-width="2" opacity=".5"/>
+        <path d="M790,0 C770,65 815,100 795,175" fill="none" stroke="#9fb488" stroke-width="2" opacity=".55"/>
+        <path d="M970,0 C950,45 985,70 968,120" fill="none" stroke="#9fb488" stroke-width="2" opacity=".5"/>
+        <path d="M1140,0 C1120,55 1160,85 1140,150" fill="none" stroke="#9fb488" stroke-width="2" opacity=".55"/>
+
+        <!-- leaves -->
+        <ellipse cx="58" cy="55" rx="7" ry="3" fill="#a9c398" opacity=".7" transform="rotate(-30 58 55)"/>
+        <ellipse cx="245" cy="35" rx="6" ry="3" fill="#a9c398" opacity=".7" transform="rotate(25 245 35)"/>
+        <ellipse cx="400" cy="140" rx="7" ry="3" fill="#a9c398" opacity=".7" transform="rotate(-20 400 140)"/>
+        <ellipse cx="610" cy="65" rx="6" ry="3" fill="#a9c398" opacity=".7" transform="rotate(20 610 65)"/>
+        <ellipse cx="780" cy="120" rx="7" ry="3" fill="#a9c398" opacity=".7" transform="rotate(-25 780 120)"/>
+        <ellipse cx="960" cy="90" rx="6" ry="3" fill="#a9c398" opacity=".7" transform="rotate(30 960 90)"/>
+
+        <!-- blossom clusters along + at ends of vines -->
+        <use href="#clusterBlue" x="70" y="0" transform="scale(1.3)" style="transform-origin:70px 0"/>
+        <use href="#clusterWhite" x="75" y="165"/>
+        <use href="#clusterLilac" x="90" y="95" transform="scale(0.85)" style="transform-origin:90px 95px"/>
+
+        <use href="#clusterWhite" x="230" y="0" transform="scale(1.1)" style="transform-origin:230px 0"/>
+        <use href="#clusterBlue" x="235" y="115"/>
+
+        <use href="#clusterLilac" x="410" y="0" transform="scale(1.3)" style="transform-origin:410px 0"/>
+        <use href="#clusterBlue" x="420" y="90" transform="scale(0.8)" style="transform-origin:420px 90px"/>
+        <use href="#clusterWhite" x="405" y="190"/>
+
+        <use href="#clusterBlue" x="600" y="0" transform="scale(1.05)" style="transform-origin:600px 0"/>
+        <use href="#clusterWhite" x="600" y="95" transform="scale(0.85)" style="transform-origin:600px 95px"/>
+
+        <use href="#clusterWhite" x="790" y="0" transform="scale(1.25)" style="transform-origin:790px 0"/>
+        <use href="#clusterLilac" x="800" y="100" transform="scale(0.8)" style="transform-origin:800px 100px"/>
+        <use href="#clusterBlue" x="795" y="175"/>
+
+        <use href="#clusterBlue" x="970" y="0" transform="scale(1.1)" style="transform-origin:970px 0"/>
+        <use href="#clusterWhite" x="968" y="120" transform="scale(0.85)" style="transform-origin:968px 120px"/>
+
+        <use href="#clusterLilac" x="1140" y="0" transform="scale(1.3)" style="transform-origin:1140px 0"/>
+        <use href="#clusterBlue" x="1140" y="150" transform="scale(0.8)" style="transform-origin:1140px 150px"/>
+      </svg>
+    </div>
+
+    <div class="hero-inner reveal">
+      <div class="monogram-ring">
+        <span>M</span><span class="ring-div">|</span><span>S</span>
+      </div>
+      <p class="eyebrow">with the blessings of our families</p>
+      <h1 class="names">
+        <span class="script">Manish</span>
+        <span class="amp">&amp;</span>
+        <span class="script">Sriviveka</span>
+      </h1>
+      <p class="invite-line">cordially invite you to celebrate their</p>
+      <h2 class="event-title">Wedding&nbsp;Reception</h2>
+      <div class="flourish" aria-hidden="true">❦</div>
+      <p class="invite-sub">Your presence and blessings will make this<br>occasion truly memorable.</p>
+      <a href="#details" class="scroll-cue" aria-label="Scroll to details">
+        <span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="countdown-strip reveal">
+    <p class="countdown-label">Counting down to the celebration</p>
+    <div class="countdown" id="countdown">
+      <div class="cd-box"><span id="cd-days">00</span><small>Days</small></div>
+      <div class="cd-box"><span id="cd-hours">00</span><small>Hours</small></div>
+      <div class="cd-box"><span id="cd-mins">00</span><small>Minutes</small></div>
+      <div class="cd-box"><span id="cd-secs">00</span><small>Seconds</small></div>
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section id="details" class="details">
+    <h3 class="section-title reveal">The Celebration</h3>
+    <div class="details-grid">
+
+      <div class="detail-card reveal">
+        <div class="detail-icon">📅</div>
+        <h4>Date</h4>
+        <p>Sunday<br><strong>20<sup>th</sup> September 2026</strong></p>
+      </div>
+
+      <div class="detail-card reveal">
+        <div class="detail-icon">☀️</div>
+        <h4>Morning Reception</h4>
+        <p><strong>10:30 AM</strong> onwards</p>
+      </div>
+
+      <div class="detail-card reveal">
+        <div class="detail-icon">🍽️</div>
+        <h4>Lunch</h4>
+        <p>Veg &amp; Non-Veg<br><strong>12:00 PM</strong> onwards</p>
+      </div>
+
+      <div class="detail-card reveal">
+        <div class="detail-icon">📍</div>
+        <h4>Venue</h4>
+        <p><strong>Srishti Vilasa</strong><br>Kanakapura Road, Bengaluru</p>
+      </div>
+
+    </div>
+
+    <div class="calendar-actions reveal">
+      <a id="gcal-link" class="btn btn-outline" target="_blank" rel="noopener">+ Add to Google Calendar</a>
+      <a id="ics-link" class="btn btn-outline" download="Manish-Sriviveka-Reception.ics">+ Download .ics</a>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="map-section reveal">
+    <h3 class="section-title">Find Your Way</h3>
+    <p class="map-sub">Srishti Vilasa, Kanakapura Road, Bengaluru</p>
+    <div class="map-frame">
+      <iframe
+        title="Venue location - Srishti Vilasa, Kanakapura Road, Bengaluru"
+        src="https://www.google.com/maps?q=Srishti+Vilasa+Kanakapura+Road+Bengaluru&output=embed"
+        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+    <a class="btn btn-solid" href="https://www.google.com/maps/dir/?api=1&destination=Srishti+Vilasa+Kanakapura+Road+Bengaluru" target="_blank" rel="noopener">Get Directions</a>
+  </section>
+
+  <!-- RSVP -->
+  <section class="rsvp reveal">
+    <h3 class="section-title">RSVP</h3>
+    <p class="rsvp-sub">We'd love to know if you can join us.</p>
+    <div class="rsvp-actions">
+      <a class="btn btn-outline" href="mailto:22sriviveka@gmail.com?subject=RSVP%20-%20Wedding%20Reception&body=We%20are%20delighted%20to%20confirm%20our%20presence%20at%20the%20wedding%20reception%20of%20Manish%20%26%20Sriviveka.%0A%0AName(s)%3A%20%0ANumber%20of%20guests%3A%20">✉️ RSVP by Email</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="flourish" aria-hidden="true">❦</div>
+    <p class="footer-line">We look forward to celebrating this joyous occasion with you.</p>
+    <p class="footer-sign">Manish &amp; Sriviveka</p>
+  </footer>
+
+</main>
+
+<script src="js/script.js"></script>
+</body>
+</html>
