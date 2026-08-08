@@ -24,6 +24,13 @@
 <!-- Twinkling fairy lights live here, injected by JS -->
 <div id="spark-field" aria-hidden="true"></div>
 
+<!-- Optional background music: drop a licensed instrumental track at
+     assets/music.mp3 and this button appears automatically. -->
+<audio id="bgm" loop preload="none">
+  <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
+<button id="musicToggle" class="music-toggle" hidden aria-label="Play music">♪</button>
+
 <!-- ===================== ENVELOPE INTRO ===================== -->
 <section id="envelope-screen">
   <div class="envelope" id="envelope">
