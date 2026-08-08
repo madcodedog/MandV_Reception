@@ -177,38 +177,65 @@
      2c. BACKGROUND MUSIC — plays whatever file is at assets/music.mp3.
      Upload/replace that file directly on github.com any time; no code
      changes needed. The button stays hidden until a file is actually
-     there. Starts automatically when the envelope is opened by a real
-     tap (browsers block autoplay without one).
+     there.
+
+     Browsers never allow audio to start with zero interaction on the
+     page — clicking a link elsewhere to arrive here doesn't count, only
+     an interaction with this page itself does. The closest thing to
+     "plays as soon as they open the link": start it muted immediately
+     (browsers do allow autoplay when muted), then unmute on the very
+     first tap/click anywhere on the page — not just the envelope — so
+     sound kicks in the instant they touch the screen at all.
      ============================================================ */
   const bgm = document.getElementById('bgm');
   const musicToggle = document.getElementById('musicToggle');
 
   if (bgm && musicToggle){
-    bgm.addEventListener('loadedmetadata', () => { musicToggle.hidden = false; }, { once: true });
+    bgm.addEventListener('loadedmetadata', () => {
+      musicToggle.hidden = false;
+      bgm.muted = true;
+      bgm.play().catch(() => {}); // muted autoplay — allowed without a gesture
+    }, { once: true });
     bgm.addEventListener('error', () => { musicToggle.hidden = true; }, true);
     bgm.load();
 
-    musicToggle.addEventListener('click', () => {
-      if (bgm.paused){
-        bgm.play().catch(() => {});
+    function unmuteMusic(){
+      if (!bgm.muted && !bgm.paused) return;
+      bgm.muted = false;
+      bgm.play().then(() => {
         musicToggle.classList.add('playing');
+        musicToggle.textContent = '♫';
         musicToggle.setAttribute('aria-label', 'Pause music');
+      }).catch(() => {});
+    }
+
+    ['click', 'touchstart', 'keydown'].forEach(evt => {
+      document.addEventListener(evt, unmuteMusic, { once: true, capture: true });
+    });
+
+    musicToggle.addEventListener('click', () => {
+      if (bgm.paused || bgm.muted){
+        unmuteMusic();
       } else {
         bgm.pause();
         musicToggle.classList.remove('playing');
+        musicToggle.textContent = '♪';
         musicToggle.setAttribute('aria-label', 'Play music');
       }
     });
   }
 
   function startMusic(){
-    if (!bgm || !bgm.paused) return;
+    if (!bgm) return;
+    bgm.muted = false;
+    if (!bgm.paused && !bgm.muted) return;
     bgm.play().then(() => {
       if (musicToggle){
         musicToggle.classList.add('playing');
+        musicToggle.textContent = '♫';
         musicToggle.setAttribute('aria-label', 'Pause music');
       }
-    }).catch(() => {}); // blocked when opened via the auto-open fallback rather than a real tap
+    }).catch(() => {});
   }
 
   /* ============================================================
