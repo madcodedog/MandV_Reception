@@ -128,6 +128,7 @@
     if (opened) return;
     opened = true;
     envelope.classList.add('opening');
+    startMusic(); // the tap that opens the envelope is our one real user gesture — browsers won't allow audio to start without it
 
     setTimeout(() => {
       envelopeScreen.classList.add('closed');
@@ -170,23 +171,38 @@
 
   /* ============================================================
      2c. AMBIENT GARDEN MUSIC (generated live, see js/ambient-music.js)
+     Starts automatically when the envelope is opened (see openInvitation
+     above) — that tap is the user gesture browsers require before any
+     audio can play. The button just lets guests pause/resume afterward.
      ============================================================ */
   const musicToggle = document.getElementById('musicToggle');
-  if (musicToggle && window.GardenAmbience){
-    let playing = false;
+  let musicPlaying = false;
+
+  function startMusic(){
+    if (musicPlaying || !window.GardenAmbience) return;
+    musicPlaying = true;
+    window.GardenAmbience.start();
+    if (musicToggle){
+      musicToggle.classList.add('playing');
+      musicToggle.textContent = '♫';
+      musicToggle.setAttribute('aria-label', 'Pause garden music');
+    }
+  }
+
+  function pauseMusic(){
+    if (!musicPlaying || !window.GardenAmbience) return;
+    musicPlaying = false;
+    window.GardenAmbience.stop();
+    if (musicToggle){
+      musicToggle.classList.remove('playing');
+      musicToggle.textContent = '♪';
+      musicToggle.setAttribute('aria-label', 'Play garden music');
+    }
+  }
+
+  if (musicToggle){
     musicToggle.addEventListener('click', () => {
-      playing = !playing;
-      if (playing){
-        window.GardenAmbience.start();
-        musicToggle.classList.add('playing');
-        musicToggle.textContent = '♫';
-        musicToggle.setAttribute('aria-label', 'Pause garden music');
-      } else {
-        window.GardenAmbience.stop();
-        musicToggle.classList.remove('playing');
-        musicToggle.textContent = '♪';
-        musicToggle.setAttribute('aria-label', 'Play garden music');
-      }
+      if (musicPlaying) pauseMusic(); else startMusic();
     });
   }
 
