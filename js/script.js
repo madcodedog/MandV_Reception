@@ -14,16 +14,42 @@
     ['#ffffff', '#f3d896'], // white petals
   ];
 
-  // A small 5-petal blossom, radiating from center — used for both falling
-  // flowers and burst particles.
+  // A small blossom, radiating from center — used for both falling flowers
+  // and burst particles. Each petal is gradient-shaded (light throat fading
+  // into the petal color, like a real bloom), rotated with slight random
+  // jitter for organic asymmetry, with a tiny stamen cluster at the center.
+  let flowerUid = 0;
   function flowerSVG(petalColor, centerColor, petalCount){
     petalCount = petalCount || 5;
     const step = 360 / petalCount;
+    const uid = 'fg' + (flowerUid++);
+
     let petals = '';
     for (let i = 0; i < petalCount; i++){
-      petals += `<path d="M20 20 C13 17 13 7 20 2 C27 7 27 17 20 20 Z" fill="${petalColor}" opacity="0.95" transform="rotate(${i * step} 20 20)"/>`;
+      const jitter = (Math.random() * 10 - 5).toFixed(1);
+      petals += `<path d="M20 20 C15 18 12 10 15 4 C17 1 23 1 25 4 C28 10 25 18 20 20 Z" fill="url(#${uid})" opacity="0.96" transform="rotate(${(i * step + Number(jitter)).toFixed(1)} 20 20)"/>`;
     }
-    return `<svg width="100%" height="100%" viewBox="0 0 40 40">${petals}<circle cx="20" cy="20" r="4" fill="${centerColor}"/></svg>`;
+
+    let stamens = '';
+    const stamenCount = petalCount <= 4 ? 3 : 4;
+    for (let s = 0; s < stamenCount; s++){
+      const angle = (360 / stamenCount) * s + 20;
+      const rad = (angle * Math.PI) / 180;
+      const sx = (20 + Math.cos(rad) * 2.6).toFixed(1);
+      const sy = (20 + Math.sin(rad) * 2.6).toFixed(1);
+      stamens += `<circle cx="${sx}" cy="${sy}" r="0.9" fill="#a8823a"/>`;
+    }
+
+    return `<svg width="100%" height="100%" viewBox="0 0 40 40">
+      <defs><radialGradient id="${uid}" cx="50%" cy="88%" r="95%">
+        <stop offset="0%" stop-color="${centerColor}" stop-opacity="0.95"/>
+        <stop offset="45%" stop-color="${petalColor}"/>
+        <stop offset="100%" stop-color="${petalColor}"/>
+      </radialGradient></defs>
+      ${petals}
+      <circle cx="20" cy="20" r="2.6" fill="${centerColor}"/>
+      ${stamens}
+    </svg>`;
   }
 
   function spawnPetal(){
@@ -84,6 +110,47 @@
 
   let sparkTimer = setInterval(spawnSpark, 420);
   for (let i = 0; i < 10; i++) setTimeout(spawnSpark, i * 140);
+
+  /* ============================================================
+     1b2. FIREFLIES — small glowing dots that wander and blink,
+     same palette as the petals and fairy-light blossoms.
+     ============================================================ */
+  const fireflyField = document.getElementById('firefly-field');
+  const FIREFLY_COLORS = [
+    ['#fff8e2', '#f3d896'], // warm gold
+    ['#eaf2fb', '#a9c3e0'], // soft blue
+    ['#f4f0fb', '#c7b8e0'], // lilac
+  ];
+
+  function spawnFirefly(){
+    if (document.hidden) return;
+    const firefly = document.createElement('div');
+    firefly.className = 'firefly';
+
+    const [core, glow] = FIREFLY_COLORS[Math.floor(Math.random() * FIREFLY_COLORS.length)];
+    const size = 5 + Math.random() * 6;
+    const x = Math.random() * 100;
+    const y = Math.random() * 100;
+    const duration = 5 + Math.random() * 4;
+    const fx = (Math.random() * 160 - 80).toFixed(0) + 'px';
+    const fy = (Math.random() * 160 - 100).toFixed(0) + 'px';
+
+    firefly.style.left = x + 'vw';
+    firefly.style.top = y + 'vh';
+    firefly.style.width = size + 'px';
+    firefly.style.height = size + 'px';
+    firefly.style.background = `radial-gradient(circle, ${core} 0%, ${glow} 55%, rgba(0,0,0,0) 75%)`;
+    firefly.style.boxShadow = `0 0 ${size * 2}px ${size * 0.8}px ${glow}66`;
+    firefly.style.setProperty('--fx', fx);
+    firefly.style.setProperty('--fy', fy);
+    firefly.style.animation = `fireflyDrift ${duration}s ease-in-out forwards`;
+
+    fireflyField.appendChild(firefly);
+    setTimeout(() => firefly.remove(), duration * 1000 + 200);
+  }
+
+  let fireflyTimer = setInterval(spawnFirefly, 650);
+  for (let i = 0; i < 6; i++) setTimeout(spawnFirefly, i * 220);
 
   /* ============================================================
      1c. CLICK-TO-BLOOM BURST

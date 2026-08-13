@@ -79,6 +79,28 @@ body{
   100% { opacity:0; transform:scale(.4) rotate(80deg) translateY(-46px); }
 }
 
+/* ============ Fireflies (drifting, blinking glow) ============ */
+#firefly-field{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:2;
+  overflow:hidden;
+}
+.firefly{
+  position:absolute;
+  border-radius:50%;
+  will-change:transform, opacity;
+}
+@keyframes fireflyDrift{
+  0%   { opacity:0; transform:translate(0,0) scale(.5); }
+  12%  { opacity:1; transform:translate(calc(var(--fx) * 0.2), calc(var(--fy) * 0.2)) scale(1); }
+  38%  { opacity:.25; }
+  55%  { opacity:1; transform:translate(calc(var(--fx) * 0.6), calc(var(--fy) * 0.6)) scale(1); }
+  78%  { opacity:.3; }
+  100% { opacity:0; transform:translate(var(--fx), var(--fy)) scale(.6); }
+}
+
 /* ============ Click-to-bloom burst ============ */
 .burst-particle{
   position:fixed;
@@ -357,26 +379,21 @@ section{
 }
 
 .scroll-cue{
-  display:inline-block;
-  margin-top:42px;
-  width:22px; height:36px;
-  border:2px solid var(--gold);
-  border-radius:14px;
-  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-top:38px;
+  color:var(--gold);
 }
-.scroll-cue span{
-  position:absolute;
-  top:6px; left:50%;
-  width:4px; height:8px;
-  margin-left:-2px;
-  background:var(--gold);
-  border-radius:2px;
-  animation:scrollDot 1.6s ease-in-out infinite;
-}
-@keyframes scrollDot{
-  0%{ transform:translateY(0); opacity:1;}
-  70%{ transform:translateY(12px); opacity:0;}
-  100%{ opacity:0;}
+.scroll-cue .chevron{ display:block; }
+.scroll-cue .chevron-2{ margin-top:-14px; }
+.scroll-cue .chevron-1{ animation:chevronSwipe 1.5s ease-in-out infinite; }
+.scroll-cue .chevron-2{ animation:chevronSwipe 1.5s ease-in-out infinite; animation-delay:.22s; }
+@keyframes chevronSwipe{
+  0%{ opacity:0; transform:translateY(-6px); }
+  40%{ opacity:1; transform:translateY(2px); }
+  80%{ opacity:.3; transform:translateY(10px); }
+  100%{ opacity:0; transform:translateY(10px); }
 }
 
 /* ---- Countdown ---- */
@@ -659,7 +676,7 @@ section{
 
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior:auto; }
-  .petal, .scroll-cue span, .tap-hint{ animation:none !important; }
+  .petal, .scroll-cue .chevron, .tap-hint{ animation:none !important; }
   .reveal{ transition:none; opacity:1; transform:none; }
   #scroll-progress{ transition:none; }
 }
