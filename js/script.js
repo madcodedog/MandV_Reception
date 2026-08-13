@@ -260,7 +260,7 @@
   /* ============================================================
      4. COUNTDOWN
      ============================================================ */
-  const EVENT_DATE = new Date(2026, 8, 20, 10, 30, 0); // 20 Sept 2026, 10:30 AM
+  const EVENT_DATE = new Date(2026, 8, 20, 11, 0, 0); // 20 Sept 2026, 11:00 AM
 
   function updateCountdown(){
     const now = new Date();
@@ -301,10 +301,10 @@
     return d.getFullYear() + pad2(d.getMonth()+1) + pad2(d.getDate()) + 'T' + pad2(d.getHours()) + pad2(d.getMinutes()) + '00';
   }
 
-  const startDate = new Date(2026, 8, 20, 10, 30, 0);
+  const startDate = new Date(2026, 8, 20, 11, 0, 0);
   const endDate = new Date(2026, 8, 20, 15, 0, 0);
   const title = "Manish & Sriviveka's Wedding Reception";
-  const details = "Morning Reception 10:30 AM onwards. Lunch (Veg & Non-Veg) 12:00 PM onwards.";
+  const details = "Morning Reception 11:00 AM onwards. Lunch (Veg & Non-Veg) 12:00 PM onwards.";
   const location = "Srishti Vilasa, Kanakapura Road, Bengaluru";
 
   const gcalLink = document.getElementById('gcal-link');
@@ -339,5 +339,56 @@
     const blob = new Blob([icsContent], { type: 'text/calendar' });
     icsLink.href = URL.createObjectURL(blob);
   }
+
+  /* ============================================================
+     6. SCROLL PROGRESS + BACK TO TOP
+     ============================================================ */
+  const scrollProgress = document.getElementById('scroll-progress');
+  const backToTop = document.getElementById('backToTop');
+
+  function updateScrollUI(){
+    const doc = document.documentElement;
+    const scrollTop = window.scrollY || doc.scrollTop;
+    const maxScroll = doc.scrollHeight - doc.clientHeight;
+    const pct = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
+    if (scrollProgress) scrollProgress.style.width = pct + '%';
+    if (backToTop) backToTop.classList.toggle('visible', scrollTop > window.innerHeight * 0.8);
+  }
+
+  if (backToTop){
+    backToTop.hidden = false; // visibility from here on is controlled by the .visible class (opacity/transform)
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  window.addEventListener('scroll', updateScrollUI, { passive: true });
+  updateScrollUI();
+
+  /* ============================================================
+     7. 3D TILT ON DETAIL CARDS (desktop only)
+     ============================================================ */
+  if (window.matchMedia('(pointer: fine)').matches){
+    document.querySelectorAll('.detail-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const relX = (e.clientX - rect.left) / rect.width - 0.5;
+        const relY = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `translateY(-6px) rotateX(${(-relY * 10).toFixed(1)}deg) rotateY(${(relX * 10).toFixed(1)}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  }
+
+  /* ============================================================
+     8. BLOOM BURST ON CTA BUTTON CLICKS
+     ============================================================ */
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      spawnBurst(e.clientX, e.clientY);
+    });
+  });
 
 })();

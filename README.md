@@ -4,7 +4,7 @@ A single-page, animated wedding invitation site: an envelope you tap open, petal
 
 Live content:
 - Sunday, 20th September 2026
-- Morning Reception — 10:30 AM onwards
+- Morning Reception — 11:00 AM onwards
 - Lunch (Veg & Non-Veg) — 12:00 PM onwards
 - Venue: Srishti Vilasa, Kanakapura Road, Bengaluru
 

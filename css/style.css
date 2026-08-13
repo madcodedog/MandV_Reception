@@ -593,6 +593,62 @@ section{
   margin:6px 0 0;
 }
 
+/* ---- Scroll progress bar ---- */
+#scroll-progress{
+  position:fixed;
+  top:0; left:0;
+  height:3px;
+  width:0%;
+  background:linear-gradient(90deg, var(--lilac-2), var(--gold), var(--blue-2));
+  z-index:300;
+  transition:width .1s linear;
+}
+
+/* ---- Back to top ---- */
+.back-to-top{
+  position:fixed;
+  left:20px;
+  bottom:20px;
+  z-index:200;
+  width:46px; height:46px;
+  border-radius:50%;
+  border:1.5px solid var(--gold);
+  background:linear-gradient(160deg,#fdfcfb,var(--cream-2));
+  color:var(--gold-deep);
+  font-size:1.1rem;
+  cursor:pointer;
+  box-shadow:var(--shadow);
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity .35s ease, transform .35s ease;
+}
+.back-to-top.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+.back-to-top:hover{ transform:translateY(-3px); }
+
+/* ---- 3D tilt on detail cards ---- */
+.detail-card{
+  transform-style:preserve-3d;
+  perspective:600px;
+}
+
+/* ---- Interactive flourish / monogram hover ---- */
+.flourish, .letter-flourish{
+  display:inline-block;
+  transition:transform .4s ease;
+}
+.flourish:hover, .letter-flourish:hover{
+  transform:rotate(12deg) scale(1.2);
+}
+.monogram-ring{
+  transition:transform .4s ease, box-shadow .4s ease;
+}
+.monogram-ring:hover{
+  transform:rotate(8deg) scale(1.05);
+}
+
 @media (max-width:480px){
   section{ padding:60px 16px; }
   .envelope{ height:280px; }
@@ -605,4 +661,5 @@ section{
   html{ scroll-behavior:auto; }
   .petal, .scroll-cue span, .tap-hint{ animation:none !important; }
   .reveal{ transition:none; opacity:1; transform:none; }
+  #scroll-progress{ transition:none; }
 }
