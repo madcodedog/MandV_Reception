@@ -227,6 +227,20 @@
     <h3 class="section-title">Find Your Way</h3>
     <p class="map-sub">Srishti Vilasa, Kanakapura Road, Bengaluru</p>
     <div class="map-frame">
+      <div class="map-pin-overlay" aria-hidden="true">
+        <span class="map-pulse-ring"></span>
+        <span class="map-pulse-ring ring-delay"></span>
+        <svg class="map-pin" viewBox="0 0 24 24" width="36" height="36">
+          <defs>
+            <linearGradient id="pinGrad" x1="4" y1="2" x2="20" y2="22" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#d9b465"/>
+              <stop offset="100%" stop-color="#8a5f1f"/>
+            </linearGradient>
+          </defs>
+          <path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8z" fill="url(#pinGrad)"/>
+          <circle cx="12" cy="10" r="3.2" fill="#fffaf0"/>
+        </svg>
+      </div>
       <iframe
         title="Venue location - Srishti Vilasa, Kanakapura Road, Bengaluru"
         src="https://www.google.com/maps?q=Srishti+Vilasa+Kanakapura+Road+Bengaluru&output=embed"

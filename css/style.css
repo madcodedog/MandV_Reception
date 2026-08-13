@@ -579,12 +579,52 @@ section{
 .map-section{ text-align:center; }
 .map-sub{ color:var(--ink); opacity:.75; margin-top:-20px; margin-bottom:26px; }
 .map-frame{
+  position:relative;
   width:100%;
   height:360px;
   border-radius:16px;
   overflow:hidden;
   border:1px solid var(--gold-light);
   box-shadow:var(--shadow);
+}
+
+/* ---- Animated map pin overlay ---- */
+.map-pin-overlay{
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-100%);
+  z-index:5;
+  pointer-events:none;
+  width:0; height:0;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+}
+.map-pin{
+  position:relative;
+  z-index:2;
+  filter:drop-shadow(0 4px 6px rgba(90,60,20,.35));
+  animation:pinFloat 2.6s ease-in-out infinite;
+  transform-origin:50% 100%;
+}
+@keyframes pinFloat{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-7px); }
+}
+.map-pulse-ring{
+  position:absolute;
+  bottom:-2px;
+  left:50%;
+  width:14px; height:14px;
+  margin-left:-7px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(201,162,75,.55), rgba(201,162,75,0) 70%);
+  animation:mapPulse 2.6s ease-out infinite;
+}
+.map-pulse-ring.ring-delay{ animation-delay:1.3s; }
+@keyframes mapPulse{
+  0%{ transform:scale(1); opacity:.7; }
+  100%{ transform:scale(7); opacity:0; }
 }
 
 /* ---- RSVP ---- */
@@ -676,7 +716,7 @@ section{
 
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior:auto; }
-  .petal, .scroll-cue .chevron, .tap-hint{ animation:none !important; }
+  .petal, .scroll-cue .chevron, .tap-hint, .map-pin, .map-pulse-ring, .firefly{ animation:none !important; }
   .reveal{ transition:none; opacity:1; transform:none; }
   #scroll-progress{ transition:none; }
 }
